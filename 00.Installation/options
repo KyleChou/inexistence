@@ -61,7 +61,7 @@ function opts_action () {
         -u | --user       ) iUser=$2 ; options_validate_username ; shift 2 ;;
         -p | --password   ) iPass=$2 ; options_validate_password ; shift 2 ;;
         -b | --branch     ) iBranch=$2        ; shift 2 ;;
-    
+
         --de              ) de_version=$2     ; shift 2 ;;
         --qb              ) qb_version=$2     ; shift 2 ;;
         --tr              ) tr_version=$2     ; shift 2 ;;
@@ -69,7 +69,7 @@ function opts_action () {
         --lt              ) lt_version=$2     ; shift 2 ;;
         --domain          ) rt_domain=$2      ; shift 2 ;;
         --hostname        ) hostname=$2       ; shift 2 ;;
-    
+
         -d | --debug      ) DeBUG=1           ; shift ;;
         -s | --skip       ) SYSTEMCHECK=0     ; shift ;;
         -y | --yes        ) ForceYes=1        ; shift ;;
@@ -81,7 +81,7 @@ function opts_action () {
         --eng             ) script_lang=eng   ; shift ;;
         --chs             ) script_lang=chs   ; shift ;;
         --enable-ipv6     ) IPv6Opt=-i        ; shift ;;
-    
+
         --vnc             ) InsVNC="Yes"      ; shift ;;
         --x2go            ) InsX2Go="Yes"     ; shift ;;
         --wine            ) InsWine="Yes"     ; shift ;;
@@ -89,20 +89,20 @@ function opts_action () {
         --tools           ) InsTools="Yes"    ; shift ;;
         --rclone          ) InsRclone="Yes"   ; shift ;;
         --flood           ) InsFlood="Yes"    ; shift ;;
-    
+
         --swap            ) USESWAP="Yes"     ; shift ;;
         --filebrowser     ) InsFB="Yes"       ; shift ;;
         --flexget         ) InsFlex="Yes"     ; shift ;;
         --tweaks          ) UseTweaks="Yes"   ; shift ;;
         --bbr             ) InsBBR="Yes"      ; shift ;;
-    
+
         --no-swap         ) USESWAP="No"      ; shift ;;
         --no-filebrowser  ) InsFB="No"        ; shift ;;
         --no-flexget      ) InsFlex="No"      ; shift ;;
         --no-tweaks       ) UseTweaks="No"    ; shift ;;
         --no-bbr          ) InsBBR="No"       ; shift ;;
         --no-source-change) aptsources="No"   ; shift ;;
-    
+
         --no-reboot       ) NoReboot=1        ; shift ;;
         --mt-single       ) MAXCPUS=1         ; shift ;;
         --mt-double       ) MAXCPUS=2         ; shift ;;
@@ -110,7 +110,7 @@ function opts_action () {
         --mt-half         ) MAXCPUS=$(echo "$(nproc) / 2"|bc)   ; shift ;;
         --tr-deb          ) tr_version=2.94   ; TRdefault=deb   ; shift ;;
         --no-system-upgrade ) skip_system_upgrade=1             ; shift ;;
-    
+
         -- ) shift ; break ;;
     esac ; done
 }
@@ -125,6 +125,7 @@ function options_validate_username() {
     elif [[ $count -lt 3 || $count -gt 32 ]]; then
         echo -e "ERROR: User name cannot less than 3 or more than 32 characters ! 用户名长度 3-32 位"
         exit 1
+    # =~ 匹配右边正则表达，匹配返回真，不匹配返回假
     elif ! [[ "$iUser" =~ ^[a-z][-a-z0-9_]*$ ]]; then
         echo -e "ERROR: Your username must start from a lower case letter and the username"
         echo -e "must contain only lowercase letters, numbers, hyphens, and underscores."
